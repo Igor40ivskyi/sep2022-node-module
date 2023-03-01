@@ -33,6 +33,6 @@ const path = require('path');
 //     console.log(err);
 // });
 
-fs.writeFile(path.join('test6', 'test6.js'), 'TEST TEST TEST', (err) => {
-    console.log(err);
-});
+// fs.writeFile(path.join('test6', 'test6.js'), 'TEST TEST TEST', (err) => {
+//     console.log(err);
+// });
