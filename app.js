@@ -29,10 +29,10 @@ const path = require('path');
 //
 // });
 
-// fs.mkdir(path.join('test2'), (err) => {
+// fs.mkdir(path.join('test4'), (err) => {
 //     console.log(err);
 // });
 
-fs.writeFile(path.join('test2', 'try.js'), 'DATA TO TRY', (err) => {
+fs.writeFile(path.join('test4', 'tryy.js'), 'DATA TO TRY', (err) => {
     console.log(err);
 });
