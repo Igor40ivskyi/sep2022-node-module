@@ -22,9 +22,9 @@ try {
         const stats = await fs.stat(path.join(process.cwd(), file));
         const isFile = stats.isFile();
         if (isFile) {
-            console.log('This is file :', stats.name);
+            console.log('This is file :', file);
         }else{
-            console.log('This is folder :', stats.name);
+            console.log('This is folder :', file);
         }
 
     }
