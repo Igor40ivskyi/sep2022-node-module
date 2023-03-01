@@ -28,3 +28,11 @@ const path = require('path');
 //     });
 //
 // });
+
+// fs.mkdir(path.join('test2'), (err) => {
+//     console.log(err);
+// });
+
+fs.writeFile(path.join('test2', 'try.js'), 'DATA TO TRY', (err) => {
+    console.log(err);
+});
