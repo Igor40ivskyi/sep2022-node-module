@@ -64,99 +64,227 @@
 
 // ================= Піднімаємо сервер EXPRESS ===============
 
-const express = require('express');
+// const express = require('express');
+//
+// const app = express();
+//
+// app.use(express.json());
+// app.use(express.urlencoded({extended: true}))
+//
+//
+// const users = [
+//     {
+//         name: 'Dima',
+//         age: 12,
+//         gender: 'male',
+//     },
+//     {
+//         name: 'Anton',
+//         age: 20,
+//         gender: 'female',
+//     },
+//     {
+//         name: 'Vasya',
+//         age: 31,
+//         gender: 'male',
+//     },
+//     {
+//         name: 'Anna',
+//         age: 28,
+//         gender:'female',
+//     },
+//     {
+//         name: 'Kokos',
+//         age: 1,
+//         gender: 'mixed',
+//     }
+// ]
+//
+//
+// app.get('/users', (req, res) => {
+//     res.json(users);
+//
+// });
+//
+// app.get('/users/:userId', (req, res) => {
+//     const {userId} = req.params;
+//
+//     const user = users[+userId - 1];
+//     res.json(user);
+// });
+//
+// app.post('/users', (req, res) => {
+//     const body = req.body;
+//
+//     users.push(body);
+//
+//     res.status(201).json({
+//         message:'user created !'
+//     })
+// });
+//
+// app.put('/users/:userId', (req, res) => {
+//
+//     const {userId} = req.params;
+//
+//     const updatedUser = req.body;
+//
+//     users[+userId -1] = updatedUser;
+//
+//     res.status(200).json({
+//         message:'user updated !',
+//         data: users[+userId - 1]
+//     })
+//
+// });
+//
+// app.delete('/users/:userId', (req, res) => {
+//     const userId = req.params;
+//
+//     users.splice(+userId, 1);
+//
+//     res.status(200).json({
+//         message:'user deleted !'
+//     })
+// });
+//
+// app.get('/welcome', (req, res) => {
+//     console.log('WELCOME!!!');
+//     res.send('WELCOME');
+// });
+//
+//
+// const PORT = 5100;
+//
+// app.listen(PORT, () => {
+//     console.log(`server has started on PORT ${PORT}`);
+// });
 
+// ========================= Піднімаємо сервер EXPRESS 2 attempt ========
+
+const express = require('express');
+const {urlencoded} = require("express");
 const app = express();
 
 app.use(express.json());
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({extended: true}));
+
 
 
 const users = [
     {
-        name: 'Dima',
-        age: 12,
-        gender: 'male',
+        name: 'Vasya',
+        age:31,
+        car:'bmw',
+        city:'Lviv',
     },
     {
         name: 'Anton',
-        age: 20,
-        gender: 'female',
+        age:22,
+        car:'Mazda',
+        city:'Kyiv',
     },
     {
-        name: 'Vasya',
-        age: 31,
-        gender: 'male',
+        name: 'Dima',
+        age:33,
+        car:'Tavria',
+        city:'Kremenchuk',
     },
     {
         name: 'Anna',
-        age: 28,
-        gender:'female',
+        age:33,
+        car:'Peugeot',
+        city:'Zaporizha',
     },
     {
-        name: 'Kokos',
-        age: 1,
-        gender: 'mixed',
+        name: 'Oleh',
+        age:23,
+        car:'Volkswagen',
+        city:'Drohovyzh',
+    },
+    {
+        name: 'Vlad',
+        age:22,
+        car:'Slavuta',
+        city:'Mykolaiv',
     }
-]
+];
 
 
 app.get('/users', (req, res) => {
-    res.json(users);
 
+    const flag = [];
+
+    if (users.length) {
+
+    res.json(users);
+    }else {
+        res.send('no users left !')
+    }
+
+});
+
+app.get('/welcome', (req, res) => {
+    console.log('WELCOME !!!')
+    res.send('WELCOME !!!!!!!!!!!!')
 });
 
 app.get('/users/:userId', (req, res) => {
+
     const {userId} = req.params;
 
     const user = users[+userId - 1];
+
     res.json(user);
+
 });
 
 app.post('/users', (req, res) => {
-    const body = req.body;
 
+    const body = req.body;
     users.push(body);
 
-    res.status(201).json({
-        message:'user created !'
-    })
+    res.status(200).json('user created ! ');
+
 });
 
 app.put('/users/:userId', (req, res) => {
-
     const {userId} = req.params;
 
     const updatedUser = req.body;
 
-    users[+userId -1] = updatedUser;
+    users[+userId - 1] = updatedUser;
 
-    res.status(200).json({
-        message:'user updated !',
-        data: users[+userId - 1]
-    })
-
+    res.json({
+        message: 'user updated !',
+        data: users[+userId - 1],
+    });
 });
 
 app.delete('/users/:userId', (req, res) => {
-    const userId = req.params;
+    const {userId} = req.params;
 
-    users.splice(+userId, 1);
+    const deletedUser = users.splice(+userId -1, 1);
 
-    res.status(200).json({
-        message:'user deleted !'
-    })
+
+
+    res.json({
+        message: 'userDeleted',
+        data: deletedUser
+    });
+
+
+
 });
 
-app.get('/welcome', (req, res) => {
-    console.log('WELCOME!!!');
-    res.send('WELCOME');
-});
+
+
 
 
 const PORT = 5100;
-
 app.listen(PORT, () => {
     console.log(`server has started on PORT ${PORT}`);
 });
+
+
 
