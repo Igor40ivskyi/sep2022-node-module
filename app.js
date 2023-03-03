@@ -162,129 +162,129 @@
 
 // ========================= Піднімаємо сервер EXPRESS 2 attempt ========
 
-const express = require('express');
-const {urlencoded} = require("express");
-const app = express();
-
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
-
-
-
-const users = [
-    {
-        name: 'Vasya',
-        age:31,
-        car:'bmw',
-        city:'Lviv',
-    },
-    {
-        name: 'Anton',
-        age:22,
-        car:'Mazda',
-        city:'Kyiv',
-    },
-    {
-        name: 'Dima',
-        age:33,
-        car:'Tavria',
-        city:'Kremenchuk',
-    },
-    {
-        name: 'Anna',
-        age:33,
-        car:'Peugeot',
-        city:'Zaporizha',
-    },
-    {
-        name: 'Oleh',
-        age:23,
-        car:'Volkswagen',
-        city:'Drohovyzh',
-    },
-    {
-        name: 'Vlad',
-        age:22,
-        car:'Slavuta',
-        city:'Mykolaiv',
-    }
-];
-
-
-app.get('/users', (req, res) => {
-
-    const flag = [];
-
-    if (users.length) {
-
-    res.json(users);
-    }else {
-        res.send('no users left !')
-    }
-
-});
-
-app.get('/welcome', (req, res) => {
-    console.log('WELCOME !!!')
-    res.send('WELCOME !!!!!!!!!!!!')
-});
-
-app.get('/users/:userId', (req, res) => {
-
-    const {userId} = req.params;
-
-    const user = users[+userId - 1];
-
-    res.json(user);
-
-});
-
-app.post('/users', (req, res) => {
-
-    const body = req.body;
-    users.push(body);
-
-    res.status(200).json('user created ! ');
-
-});
-
-app.put('/users/:userId', (req, res) => {
-    const {userId} = req.params;
-
-    const updatedUser = req.body;
-
-    users[+userId - 1] = updatedUser;
-
-    res.json({
-        message: 'user updated !',
-        data: users[+userId - 1],
-    });
-});
-
-app.delete('/users/:userId', (req, res) => {
-    const {userId} = req.params;
-
-    const deletedUser = users.splice(+userId -1, 1);
-
-
-
-    res.json({
-        message: 'userDeleted',
-        data: deletedUser
-    });
-
-
-
-});
-
-
-
-
-
-const PORT = 5100;
-app.listen(PORT, () => {
-    console.log(`server has started on PORT ${PORT}`);
-});
+// const express = require('express');
+// const {urlencoded} = require("express");
+// const app = express();
+//
+// app.use(express.json());
+// app.use(express.urlencoded({extended: true}));
+//
+//
+//
+// const users = [
+//     {
+//         name: 'Vasya',
+//         age:31,
+//         car:'bmw',
+//         city:'Lviv',
+//     },
+//     {
+//         name: 'Anton',
+//         age:22,
+//         car:'Mazda',
+//         city:'Kyiv',
+//     },
+//     {
+//         name: 'Dima',
+//         age:33,
+//         car:'Tavria',
+//         city:'Kremenchuk',
+//     },
+//     {
+//         name: 'Anna',
+//         age:33,
+//         car:'Peugeot',
+//         city:'Zaporizha',
+//     },
+//     {
+//         name: 'Oleh',
+//         age:23,
+//         car:'Volkswagen',
+//         city:'Drohovyzh',
+//     },
+//     {
+//         name: 'Vlad',
+//         age:22,
+//         car:'Slavuta',
+//         city:'Mykolaiv',
+//     }
+// ];
+//
+//
+// app.get('/users', (req, res) => {
+//
+//     const flag = [];
+//
+//     if (users.length) {
+//
+//     res.json(users);
+//     }else {
+//         res.send('no users left !')
+//     }
+//
+// });
+//
+// app.get('/welcome', (req, res) => {
+//     console.log('WELCOME !!!')
+//     res.send('WELCOME !!!!!!!!!!!!')
+// });
+//
+// app.get('/users/:userId', (req, res) => {
+//
+//     const {userId} = req.params;
+//
+//     const user = users[+userId - 1];
+//
+//     res.json(user);
+//
+// });
+//
+// app.post('/users', (req, res) => {
+//
+//     const body = req.body;
+//     users.push(body);
+//
+//     res.status(200).json('user created ! ');
+//
+// });
+//
+// app.put('/users/:userId', (req, res) => {
+//     const {userId} = req.params;
+//
+//     const updatedUser = req.body;
+//
+//     users[+userId - 1] = updatedUser;
+//
+//     res.json({
+//         message: 'user updated !',
+//         data: users[+userId - 1],
+//     });
+// });
+//
+// app.delete('/users/:userId', (req, res) => {
+//     const {userId} = req.params;
+//
+//     const deletedUser = users.splice(+userId -1, 1);
+//
+//
+//
+//     res.json({
+//         message: 'userDeleted',
+//         data: deletedUser
+//     });
+//
+//
+//
+// });
+//
+//
+//
+//
+//
+// const PORT = 5100;
+// app.listen(PORT, () => {
+//     console.log(`server has started on PORT ${PORT}`);
+// });
 
 
 
