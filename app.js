@@ -22,7 +22,13 @@ app.get('/users', (req, res) => {
     fs.readFile(path.join('bdUsers.json'), (err, data) => {
         const users = JSON.parse(data);
 
+        if (users.length) {
         res.json(users);
+
+        }else {
+            res.json('NO USERS PRESENT')
+        }
+
 
     });
 
@@ -31,72 +37,74 @@ app.get('/users', (req, res) => {
 app.post('/users', (req, res) => {
 
     const newUser = req.body;
+    const nameTypeofCheck = typeof (newUser.name);
+    const nameLengthCheck = newUser.name.length;
+    const ageTypeofChek = typeof (newUser.age);
+    const ageChek = newUser.age;
+    const genderCheck = newUser.gender;
 
-    fs.readFile(path.join('bdUsers.json'), (err, data) => {
-        const users = JSON.parse(data);
-        users.push(newUser);
+    if (nameTypeofCheck === "string" && nameLengthCheck >= 2 && ageTypeofChek === "number" &&
+        ageChek >= 0 && genderCheck === 'male' || genderCheck === 'female' || genderCheck === 'mixed'
+    ) {
 
-        const usersArr = JSON.stringify(users);
+        fs.readFile(path.join('bdUsers.json'), (err, data) => {
+            const users = JSON.parse(data);
+            users.push(newUser);
 
-        console.log(usersArr,'USERS ARR');
+            const usersArr = JSON.stringify(users);
 
-        fs.writeFile(path.join('bdUsers.json'), usersArr, (err, data) => {
+            fs.writeFile(path.join('bdUsers.json'), usersArr, (err, data) => {
+            });
         });
-    });
+       return res.json('user created ');
+    }
 
-    res.json('user created !');
+    res.json('invalid user data ')
+
 });
 
 app.put('/users/:userId', (req, res) => {
 
     const {userId} = req.params;
-    const updatedUser = req.body;
+
+    const newUser = req.body;
+    const nameTypeofCheck = typeof (newUser.name);
+    const nameLengthCheck = newUser.name.length;
+    const ageTypeofChek = typeof (newUser.age);
+    const ageChek = newUser.age;
+    const genderCheck = newUser.gender;
+
     fs.readFile(path.join('bdUsers.json'), (err, data) => {
 
         const usersArr = JSON.parse(data.toString());
 
-        usersArr[+userId - 1] = updatedUser;
+        if (nameTypeofCheck === "string" && nameLengthCheck >= 2 && ageTypeofChek === "number" &&
+            ageChek >= 0 && genderCheck === 'male' || genderCheck === 'female' || genderCheck === 'mixed' &&
+            typeof (+userId) === 'number' && +userId > 0 && +userId - 1 <= usersArr.length
+        ) {
 
-        const usersJSONArr = JSON.stringify(usersArr);
+            fs.readFile(path.join('bdUsers.json'), (err, data) => {
 
-        fs.writeFile(path.join('bdUsers.json'), usersJSONArr, (err, data) => {
-            console.log(err);
-        });
+                const usersArr = JSON.parse(data.toString());
 
+                usersArr[+userId - 1] = updatedUser;
 
+                const usersJSONArr = JSON.stringify(usersArr);
+
+                fs.writeFile(path.join('bdUsers.json'), usersJSONArr, (err, data) => {
+                    console.log(err);
+                });
+            });
+
+            return res.json('user UPDATED !')
+        }
+
+        res.json('invalid user data or no such user');
     });
 
- res.json('user UPDATED !')
 });
+
 
 app.delete('/users/:userId', (req, res) => {
 
-    const {userId} = req.params;
-
-    fs.readFile(path.join('bdUsers.json'), (err, data) => {
-
-        const usersArr = JSON.parse(data);
-
-        usersArr.splice(+userId - 1, 1);
-
-        const users = JSON.stringify(usersArr);
-
-        fs.writeFile(path.join('bdUsers.json'),users, (err, data) => {
-
-        });
-    });
-
-    res.json('user DELETED !')
 });
-
-
-
-
-// fs.readFile(path.join('bdUsers.json'), (err, data) => {
-//     console.log(data.toString());
-//
-// });
-
-
-
-
