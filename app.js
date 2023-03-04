@@ -34,6 +34,8 @@ app.post('/users', async (req, res) => {
 
     users.push(newUser);
 
+    await fsService.writer(users);
 
+ res.status(201).json(newUser)
 
 });
