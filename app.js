@@ -23,6 +23,17 @@ app.post('/users', async (req, res) => {
 
     const {name, age, gender} = req.body;
 
+    if (!name || name.length < 2) {
+        res.status(400).json('wrong name');
+    }
+    if (!age || !Number.isInteger(age) || Number.isNaN(age)) {
+        res.status(400).json('wron age');
+    }
+    if (!gender || (gender !== 'male' && gender !== 'female')) {
+        res.status(400).json('wrong gender');
+    }
+
+
     const users = await fsService.reader();
 
     const newUser = {
