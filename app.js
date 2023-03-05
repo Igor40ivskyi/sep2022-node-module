@@ -19,6 +19,21 @@ app.get('/users', async (req, res) => {
 
 });
 
+app.get('/users/:userId', async (req, res) => {
+
+    const {userId} = req.params;
+
+    const users = await fsService.reader();
+
+    const user = users.find(user => user.id === +userId);
+
+    if (!user) {
+        res.status(400).json(`user with id : ${userId} not found`);
+    }
+
+    res.json(user);
+});
+
 app.post('/users', async (req, res) => {
 
     const {name, age, gender} = req.body;
@@ -48,5 +63,16 @@ app.post('/users', async (req, res) => {
     await fsService.writer(users);
 
  res.status(201).json(newUser)
+
+});
+
+app.put('/users/:userId', async (req, res) => {
+
+    const {name, age, gender} = req.body;
+
+    if (name && name.length < 2) {
+        res.status(400).json('wron name');
+    }
+
 
 });
